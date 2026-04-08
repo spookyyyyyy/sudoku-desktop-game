@@ -2,6 +2,8 @@ package models;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +28,19 @@ public class SudokuFieldTest {
             assertTrue(field3.compareTo(field2) > 0);
             assertTrue(field3.compareTo(field1) > 0);
         });
+    }
+
+    @Test
+    void testEqualsAndClone() {
+        SudokuField field1 = new SudokuField(5);
+        SudokuField field2 = new SudokuField(5);
+        
+        assertTrue(field1.equals(field2));
+        assertTrue(field1.equals(field1));
+        assertFalse(field1.equals(null));
+        assertFalse(field1.equals("string"));
+        
+        SudokuField cloned = field1.clone();
+        assertEquals(field1, cloned);
     }
 }
